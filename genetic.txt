@@ -1,0 +1,45 @@
+import random
+import numpy as np
+# Define the fitness function
+def fitness_function(individual):
+    return sum(individual)
+# Define the Simple Genetic Algorithm
+def simple_genetic_algorithm(population_size, chromosome_length, generations):
+    # Create the initial population
+    population = []
+    for i in range(population_size):
+        chromosome = [random.randint(0, 1) for j in range(chromosome_length)]
+        population.append(chromosome)
+
+    # Run the evolution for the specified number of generations
+    for generation in range(generations):
+        # Evaluate the fitness of each individual in the population
+        fitness_values = [fitness_function(individual) for individual in population]
+
+        # Select the parents for reproduction
+        parents = []
+        for i in range(population_size):
+            parent1 = population[random.randint(0, population_size-1)]
+            parent2 = population[random.randint(0, population_size-1)]
+            parents.append((parent1, parent2))
+
+        # Reproduce to create the next generation
+        offspring = []
+        for parent1, parent2 in parents:
+            crossover_point = random.randint(0, chromosome_length-1)
+            child = parent1[:crossover_point] + parent2[crossover_point:]
+            offspring.append(child)
+
+        # Mutate the offspring
+        for i in range(population_size):
+            for j in range(chromosome_length):
+                if random.random() < 0.1:
+                    offspring[i][j] = 1 - offspring[i][j]
+
+        # Replace the old population with the new generation
+        population = offspring
+
+    # Return the best individual found in the final generation
+    fitness_values = [fitness_function(individual) for individual in population]
+    best_individual = population[np.argmax(fitness_values)]
+    return best_individual

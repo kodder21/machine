@@ -1,0 +1,18 @@
+from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Generate some random data
+y_true = [0, 1, 2, 0, 1, 2, 0, 1, 2]
+y_pred = [0, 1, 2, 1, 0, 1, 0, 2, 2]
+
+# Create the confusion matrix
+conf_mat = confusion_matrix(y_true, y_pred)
+
+# Plot the confusion matrix
+sns.set()
+sns.heatmap(conf_mat, annot=True, cmap="Blues", fmt="d")
+plt.title("Confusion Matrix")
+plt.xlabel("Predicted Labels")
+plt.ylabel("True Labels")
+plt.show()

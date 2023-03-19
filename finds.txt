@@ -1,0 +1,30 @@
+import pandas as pd
+
+# Define the training data
+training_data = pd.DataFrame({
+    'Sky': ['Sunny', 'Sunny', 'Rainy', 'Sunny', 'Sunny', 'Rainy', 'Rainy', 'Sunny'],
+    'AirTemp': ['Warm', 'Warm', 'Cold', 'Warm', 'Warm', 'Cold', 'Cold', 'Warm'],
+    'Humidity': ['Normal', 'High', 'High', 'High', 'Normal', 'Normal', 'High', 'Normal'],
+    'Wind': ['Weak', 'Strong', 'Weak', 'Weak', 'Weak', 'Strong', 'Strong', 'Weak'],
+    'Water': ['Warm', 'Warm', 'Cool', 'Warm', 'Warm', 'Cool', 'Cool', 'Warm'],
+    'Forecast': ['Same', 'Same', 'Change', 'Same', 'Same', 'Change', 'Change', 'Same'],
+    'EnjoySport': ['Yes', 'Yes', 'No', 'Yes', 'Yes', 'No', 'No', 'Yes']
+})
+
+# Define the Find-S algorithm
+def find_s_algorithm(training_data):
+    hypothesis = ['0'] * (len(training_data.columns) - 1)
+    for index, row in training_data.iterrows():
+        if row.iloc[-1] == 'Yes':
+            for i in range(len(hypothesis)):
+                if hypothesis[i] == '0':
+                    hypothesis[i] = row[i]
+                elif hypothesis[i] != row[i]:
+                    hypothesis[i] = '?'
+    return hypothesis
+
+# Run the Find-S algorithm on the training data
+hypothesis = find_s_algorithm(training_data)
+
+# Print the hypothesis
+print('Hypothesis:', hypothesis)

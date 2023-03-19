@@ -1,0 +1,17 @@
+from skimage import io
+from skimage.filters import prewitt_h, prewitt_v
+from skimage.color import rgb2gray
+# Load the image
+img = io.imread('bhoot.jpg')
+# Load the image
+img = io.imread('bhoot.jpg')
+# Apply Prewitt edge detection filters
+edges_x = prewitt_h(gray_img)
+edges_y = prewitt_v(gray_img)
+
+# Combine the horizontal and vertical edges
+edges = edges_x + edges_y
+
+# Display the original and the edge detected image
+io.imshow_collection([img, edges])
+io.show()

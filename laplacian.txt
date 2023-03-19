@@ -1,0 +1,18 @@
+import cv2
+import numpy as np
+
+# Load the image
+img = cv2.imread('cube.jpg', 0)
+
+# Apply Laplacian edge detection filter
+laplacian = cv2.Laplacian(img, cv2.CV_64F)
+
+# Convert the result to uint8 and normalize it
+edges = np.uint8(np.absolute(laplacian))
+edges = cv2.normalize(edges, None, 0, 255, cv2.NORM_MINMAX)
+
+# Display the original and the edge detected image
+cv2.imshow('Original', img)
+cv2.imshow('Laplacian Edges', edges)
+cv2.waitKey(0)
+cv2.destroyAllWindows()

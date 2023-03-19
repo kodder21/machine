@@ -1,0 +1,14 @@
+import cv2
+import numpy as np
+
+# Load the image
+img = cv2.imread('butterfly.jpg', 0)
+
+# Apply Canny edge detection filter
+edges = cv2.Canny(img, 100, 200)
+
+# Display the original and the edge detected image
+cv2.imshow('Original', img)
+cv2.imshow('Canny Edges', edges)
+cv2.waitKey(0)
+cv2.destroyAllWindows()

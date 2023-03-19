@@ -1,0 +1,18 @@
+from sklearn.mixture import GaussianMixture
+import numpy as np
+
+# Define the training data
+X = np.array([[1.0, 2.0], [2.0, 1.0], [2.0, 3.0], [3.0, 2.0]])
+
+# Define the initial parameters for the GMM
+k = 2  # Number of clusters
+gmm = GaussianMixture(n_components=k, covariance_type='full')
+
+# Fit the GMM to the data using the EM algorithm
+gmm.fit(X)
+
+# Print the learned parameters
+print('Learned Cluster Means:', gmm.means_)
+print('Learned Cluster Covariances:', gmm.covariances_)
+print('Learned Cluster Weights:', gmm.weights_)
+

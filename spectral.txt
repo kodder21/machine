@@ -1,0 +1,20 @@
+import warnings
+warnings.simplefilter(action='ignore')
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_circles
+from sklearn.cluster import SpectralClustering
+
+# Generate some random data in the shape of two circles
+X, y = make_circles(n_samples=500, factor=0.5, noise=0.05)
+
+# Create Spectral Clustering object
+spectral = SpectralClustering(n_clusters=2, eigen_solver='arpack', affinity="nearest_neighbors")
+
+# Fit and predict clusters
+y_pred = spectral.fit_predict(X)
+
+# Plot the results
+plt.scatter(X[:, 0], X[:, 1], c=y_pred)
+plt.title("Spectral Clustering")
+plt.show()
